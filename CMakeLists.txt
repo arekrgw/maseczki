@@ -7,7 +7,7 @@ if (APPLE)
 endif (APPLE)
 
 if (WIN32)
-	set(OpenCV_DIR "D:/MyLibs/OpenCV/opencv-3.2.0_binaries")
+	set(OpenCV_DIR "C:/opencv/build/x64/vc15/lib")
 endif (WIN32)
 
 

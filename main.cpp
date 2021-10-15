@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	}
 	cv::Mat grayscale;
 	cv::Mat equalized;
-	cv::cvtColor(image, grayscale, CV_BGR2GRAY);
+	cv::cvtColor(image, grayscale, cv::COLOR_BGR2GRAY);
 	cv::equalizeHist(grayscale, equalized);
 	cv::imshow("Grayscale img", grayscale);
 	cv::waitKey(0);
