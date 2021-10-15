@@ -1,4 +1,6 @@
 build
+build_opencv
+opencv-4.5.4
 .idea
 .vscode
 /.vs/maseczeki-pk/v17/RC/Browse.VC.db
