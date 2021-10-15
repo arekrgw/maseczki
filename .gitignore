@@ -1,3 +1,10 @@
 build
 .idea
 .vscode
+/.vs/maseczeki-pk/v17/RC/Browse.VC.db
+/.vs/maseczeki-pk/v17/RC/Browse.VC.db-shm
+/.vs/maseczeki-pk/v17/RC/Browse.VC.db-wal
+/.vs/maseczeki-pk/v17/RC/Browse.VC.opendb
+/.vs/CMake Overview
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
