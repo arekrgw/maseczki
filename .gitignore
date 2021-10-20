@@ -14,3 +14,5 @@ opencv-4.5.4
 /.vs/maseczeki-pk/v17/RC/ipch/AutoPCH/28feeb6ed8e2473d/MAIN.ipch
 /.vs/maseczeki-pk/v17/.suo
 /.vs/cmake.db
+assets/*
+!assets/.gitkeep
