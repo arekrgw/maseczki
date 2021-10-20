@@ -3,6 +3,7 @@ build_opencv
 opencv-4.5.4
 .idea
 .vscode
+.DS_Store
 /.vs/maseczeki-pk/v17/RC/Browse.VC.db
 /.vs/maseczeki-pk/v17/RC/Browse.VC.db-shm
 /.vs/maseczeki-pk/v17/RC/Browse.VC.db-wal
