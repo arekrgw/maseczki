@@ -6,7 +6,7 @@
 
 int main(int argc, char **argv)
 {
-	std::string fileName("../assets/arek_clean_full.jpg");
+	std::string fileName("fotka.jpeg");
 
 	if (argc > 1)
 	{
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	cv::cvtColor(image, imgToFindFace, cv::COLOR_BGR2GRAY);
 
 	cv::CascadeClassifier faceCascade;
-	faceCascade.load("/Users/arekrgw/Studia/PK/opencv-4.5.4/data/haarcascades/haarcascade_frontalface_alt2.xml");
+	faceCascade.load("/Users/adamglowacz/Desktop/C++Project/TeamProject/maseczeki-pk/opencv-4.5.4/data/haarcascades/haarcascade_frontalface_alt2.xml");
 
 	std::vector<cv::Rect> faces;
 
