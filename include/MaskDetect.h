@@ -12,8 +12,7 @@ public:
     {
         if (image.empty())
         {
-            std::cout << "Could not find or open the image." << std::endl;
-            exit(-1);
+            throw "Invalid argument"
         }
         image = file;
     }
