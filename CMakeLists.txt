@@ -19,6 +19,9 @@ include_directories(
 
 add_executable(maseczki-pk
 	src/main.cpp
+	src/MaskDetect.cpp
+	../include/MaskDetect.h
+
 	# You can put here your .h and .cpp files to expand the example.
 )
 
