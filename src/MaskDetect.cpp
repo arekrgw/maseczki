@@ -3,13 +3,6 @@
 cv::Mat MaskDetect::DetectFace()
 {
     cv::Mat imgToFindFace;
-
-    if (image.empty())
-    {
-        std::cout << "Could not find or open the image." << std::endl;
-        exit(-1);
-    }
-
     cv::cvtColor(image, imgToFindFace, cv::COLOR_BGR2GRAY);
 
     cv::CascadeClassifier faceCascade;
