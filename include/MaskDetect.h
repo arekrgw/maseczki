@@ -7,10 +7,9 @@
 
 class MaskDetect {
     public:
-    std::string filePath;
-    MaskDetect(std::string file){
-        std::cout << file << std::endl;
-        filePath = file;
+    cv::Mat image;
+    MaskDetect(cv::Mat file){
+        image = file;
     }
     cv::Mat DetectFace();
 };

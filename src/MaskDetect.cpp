@@ -2,7 +2,6 @@
 
 cv::Mat MaskDetect::DetectFace()
 {
-    cv::Mat image = cv::imread(filePath, cv::IMREAD_COLOR);
     cv::Mat imgToFindFace;
 
     if (image.empty())

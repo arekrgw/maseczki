@@ -10,7 +10,9 @@ int main(int argc, char **argv)
 		fileName = argv[1];
 	}
 
-	MaskDetect md(fileName);
+	 cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
+
+	MaskDetect md(image);
 
 	cv::Mat imgToFindFace = md.DetectFace();
 
