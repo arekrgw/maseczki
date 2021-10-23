@@ -4,15 +4,6 @@ opencv-4.5.4
 .idea
 .vscode
 .DS_Store
-/.vs/maseczeki-pk/v17/RC/Browse.VC.db
-/.vs/maseczeki-pk/v17/RC/Browse.VC.db-shm
-/.vs/maseczeki-pk/v17/RC/Browse.VC.db-wal
-/.vs/maseczeki-pk/v17/RC/Browse.VC.opendb
-/.vs/CMake Overview
-/.vs/ProjectSettings.json
-/.vs/slnx.sqlite
-/.vs/maseczeki-pk/v17/RC/ipch/AutoPCH/28feeb6ed8e2473d/MAIN.ipch
-/.vs/maseczeki-pk/v17/.suo
-/.vs/cmake.db
+.vs
 assets/*
 !assets/.gitkeep

@@ -4,17 +4,15 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 
+using namespace cv;
+
 class MaskDetect
 {
+private:
+    CascadeClassifier faceCascade;
+    void LoadFaceCascade();
+
 public:
-    cv::Mat image;
-    MaskDetect(cv::Mat file)
-    {
-        if (image.empty())
-        {
-            throw "Invalid argument"
-        }
-        image = file;
-    }
-    cv::Mat DetectFace();
+    MaskDetect();
+    Mat DetectFace(Mat image);
 };

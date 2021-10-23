@@ -1,23 +1,60 @@
 #include "../include/MaskDetect.h"
+#include "../include/Resources.h"
 #include <iostream>
 
 int main(int argc, char **argv)
 {
-	std::string fileName("../assets/arek_clean_semi.jpg");
-	if (argc > 1)
+	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
 	{
-		fileName = argv[1];
+		std::string fileName(ASSET_PATH("easy/arek_clean_full.jpg"));
+		try
+		{
+			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
+
+			MaskDetect md;
+			cv::Mat imgToFindFace = md.DetectFace(image);
+
+			cv::imshow("Detected Face", imgToFindFace);
+
+			cv::waitKey(0);
+		}
+		catch (std::exception e)
+		{
+			std::cout << e.what();
+		}
 	}
+	else if (std::strcmp(argv[1], "camera") == 0)
+	{
+		Mat frame;
+		VideoCapture cap;
+		MaskDetect maskDetect;
+		cap.open(0);
 
-	cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
+		if (!cap.isOpened())
+		{
+			std::cerr << "ERROR! Unable to open camera\n";
+			return -1;
+		}
 
-	MaskDetect md(image);
+		for (;;)
+		{
+			cap.read(frame);
 
-	cv::Mat imgToFindFace = md.DetectFace();
+			if (frame.empty())
+			{
+				std::cerr << "ERROR! blank frame grabbed\n";
+				break;
+			}
 
-	cv::imshow("Detected Face", imgToFindFace);
+			Mat imgWithFaces = maskDetect.DetectFace(frame);
 
-	cv::waitKey(0);
+			imshow("Live", imgWithFaces);
+			if (waitKey(5) >= 0)
+				break;
+		}
+
+		std::cout << "camera";
+	}
 
 	return 0;
 }

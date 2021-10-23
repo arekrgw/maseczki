@@ -21,6 +21,7 @@ add_executable(maseczki-pk
 	src/main.cpp
 	src/MaskDetect.cpp
 	../include/MaskDetect.h
+	../include/Resources.h
 
 	# You can put here your .h and .cpp files to expand the example.
 )

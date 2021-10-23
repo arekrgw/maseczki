@@ -1,22 +1,38 @@
 #include "../include/MaskDetect.h"
+#include "../include/Resources.h"
+#include <iostream>
 
-cv::Mat MaskDetect::DetectFace()
+using namespace cv;
+
+MaskDetect::MaskDetect()
 {
-    cv::Mat imgToFindFace;
-    cv::cvtColor(image, imgToFindFace, cv::COLOR_BGR2GRAY);
+    LoadFaceCascade();
+}
 
-    cv::CascadeClassifier faceCascade;
-    faceCascade.load("/Users/adamglowacz/Desktop/C++Project/TeamProject/maseczeki-pk/opencv-4.5.4/data/haarcascades/haarcascade_frontalface_alt2.xml");
+Mat MaskDetect::DetectFace(Mat image)
+{
+    if (image.empty())
+    {
+        throw std::invalid_argument("Image not provided");
+    }
 
-    std::vector<cv::Rect> faces;
+    std::vector<Rect> faces;
 
-    faceCascade.detectMultiScale(imgToFindFace, faces, 1.2, 2, cv::CASCADE_DO_CANNY_PRUNING, cv::Size(100, 100));
+    faceCascade.detectMultiScale(image, faces, 1.2, 2, CASCADE_DO_CANNY_PRUNING, Size(100, 100));
 
     for (int i = 0; i < faces.size(); i++)
     {
-        cv::Point center(faces[i].x + faces[i].width * 0.5, faces[i].y + faces[i].height * 0.5);
-        ellipse(imgToFindFace, center, cv::Size(faces[i].width * 0.5, faces[i].height * 0.5), 0, 0, 360, cv::Scalar(255, 0, 255), 4, 8, 0);
+        Point center(faces[i].x + faces[i].width * 0.5, faces[i].y + faces[i].height * 0.5);
+        ellipse(image, center, Size(faces[i].width * 0.5, faces[i].height * 0.5), 0, 0, 360, Scalar(255, 0, 255), 4, 8, 0);
     }
 
-    return imgToFindFace;
+    return image;
+}
+
+void MaskDetect::LoadFaceCascade()
+{
+    if (faceCascade.empty())
+    {
+        faceCascade.load(FACE_CASCADE);
+    }
 }
