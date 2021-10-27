@@ -1,5 +1,6 @@
 #include "../include/MaskDetect.h"
 #include "../include/Resources.h"
+#include "../include/MaskOn.h"
 #include <iostream>
 
 using namespace cv;
@@ -7,6 +8,14 @@ using namespace cv;
 MaskDetect::MaskDetect()
 {
     LoadFaceCascade();
+    LoadMouthCascade();
+    LoadEyeCascade();
+}
+
+MaskOn MaskDetect::DetectMask(Mat image)
+{
+    // whole mask detection
+    return CORRECT;
 }
 
 Mat MaskDetect::DetectFace(Mat image)
@@ -34,5 +43,21 @@ void MaskDetect::LoadFaceCascade()
     if (faceCascade.empty())
     {
         faceCascade.load(FACE_CASCADE);
+    }
+}
+
+void MaskDetect::LoadMouthCascade()
+{
+    if (mouthCascade.empty())
+    {
+        mouthCascade.load(MOUTH_CASCADE);
+    }
+}
+
+void MaskDetect::LoadEyeCascade()
+{
+    if (eyeCascade.empty())
+    {
+        eyeCascade.load(EYE_PAIR_CASCADE);
     }
 }

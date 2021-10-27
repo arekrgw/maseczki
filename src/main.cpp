@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
 	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
 	{
-		std::string fileName(ASSET_PATH("easy/arek_clean_full.jpg"));
+		std::string fileName(ASSET_PATH("easy/adrian_clean_semi.jpg"));
 		try
 		{
 			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
