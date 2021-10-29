@@ -1,5 +1,4 @@
-#ifndef RESOURCES
-#define RESOURCES
+#pragma once
 
 #include <iostream>
 #include <cstdlib>
@@ -12,5 +11,3 @@ const std::string MOUTH_CASCADE = ASSETS_PATH + "/haarcascades/haarcascade_mcs_m
 inline std::string ASSET_PATH(std::string path) {
   return ASSETS_PATH + path;
 }
-
-#endif

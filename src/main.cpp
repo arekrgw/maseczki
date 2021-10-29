@@ -1,64 +1,64 @@
-#include "../include/MaskDetect.h"
-#include "../include/Resources.h"
+#include "Resources.h"
+#include "FaceDetection.h"
 #include <iostream>
 
 int main(int argc, char **argv)
 {
-	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
-	{
-		
-		std::string fileName(ASSET_PATH("/easy/adrian_clean_semi.jpg"));
-		std::cout << fileName;
+	// if (argc < 2 || std::strcmp(argv[1], "image") == 0)
+	// {
 
-		try
-		{
-			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
-			MaskDetect md;
-			cv::Mat imgToFindFace = md.DetectFace(image);
-			cv:Mat imgToFindFace2;
-			cv::resize(imgToFindFace, imgToFindFace2, cv::Size(), 0.2, 0.2);
+	// 	std::string fileName(ASSET_PATH("/easy/adrian_clean_semi.jpg"));
+	// 	std::cout << fileName;
 
-			cv::imshow("Detected Face", imgToFindFace2);
+	// 	try
+	// 	{
+	// 		cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
+	// 		MaskDetect md;
+	// 		cv::Mat imgToFindFace = md.DetectFace(image);
+	// 		cv:Mat imgToFindFace2;
+	// 		cv::resize(imgToFindFace, imgToFindFace2, cv::Size(), 0.2, 0.2);
 
-			cv::waitKey(0);
-		}
-		catch (std::exception e)
-		{
-			std::cout << e.what();
-		}
-	}
-	else if (std::strcmp(argv[1], "camera") == 0)
-	{
-		Mat frame;
-		VideoCapture cap;
-		MaskDetect maskDetect;
-		cap.open(0);
+	// 		cv::imshow("Detected Face", imgToFindFace2);
 
-		if (!cap.isOpened())
-		{
-			std::cerr << "ERROR! Unable to open camera\n";
-			return -1;
-		}
+	// 		cv::waitKey(0);
+	// 	}
+	// 	catch (std::exception e)
+	// 	{
+	// 		std::cout << e.what();
+	// 	}
+	// }
+	// else if (std::strcmp(argv[1], "camera") == 0)
+	// {
+	// 	Mat frame;
+	// 	VideoCapture cap;
+	// 	// MaskDetect maskDetect;
+	// 	cap.open(0);
 
-		for (;;)
-		{
-			cap.read(frame);
+	// 	if (!cap.isOpened())
+	// 	{
+	// 		std::cerr << "ERROR! Unable to open camera\n";
+	// 		return -1;
+	// 	}
 
-			if (frame.empty())
-			{
-				std::cerr << "ERROR! blank frame grabbed\n";
-				break;
-			}
+	// 	for (;;)
+	// 	{
+	// 		cap.read(frame);
 
-			Mat imgWithFaces = maskDetect.DetectFace(frame);
+	// 		if (frame.empty())
+	// 		{
+	// 			std::cerr << "ERROR! blank frame grabbed\n";
+	// 			break;
+	// 		}
 
-			imshow("Live", imgWithFaces);
-			if (waitKey(5) >= 0)
-				break;
-		}
+	// 		// Mat imgWithFaces = maskDetect.DetectFace(frame);
 
-		std::cout << "camera";
-	}
+	// 		// imshow("Live", imgWithFaces);
+	// 		if (waitKey(5) >= 0)
+	// 			break;
+	// 	}
+
+	// 	std::cout << "camera";
+	// }
 
 	return 0;
 }
