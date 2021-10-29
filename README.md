@@ -10,3 +10,15 @@ download and insert images into "assets" folder flat
 - https://opencvfacedetect.blogspot.com/2010/10/face-detectionfollowed-by-eyesnose.html
 - https://opencv-tutorials-hub.blogspot.com/2016/03/how-to-do-face-detection-opencv-haar-cascade.html
 - https://highontechs.com/computer-vision/face-mask-detection-using-opencv-haarcascade/
+
+
+## Examples
+
+### FaceDetection
+```
+Mat image, croppedImage;
+Rect coords;
+FaceDetection faceDetection;
+
+faceDetection.detect(image, croppedImage, coords);
+```
