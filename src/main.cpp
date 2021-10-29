@@ -8,6 +8,7 @@ int main(int argc, char **argv)
 	{
 		std::string fileName = ASSET_PATH("/easy/adrian_clean_semi.jpg");
 		std::cout<<fileName;
+
 		try
 		{
 			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
