@@ -21,6 +21,7 @@ include_directories(
 add_executable(maseczki-pk
 	src/main.cpp
 	src/FaceDetection.cpp
+	src/EyesDetection.cpp
 
 	# You can put here your .h and .cpp files to expand the example.
 )

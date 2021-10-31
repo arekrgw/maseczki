@@ -1,32 +1,36 @@
 #include "Resources.h"
 #include "FaceDetection.h"
+#include "EyesDetection.h"
 #include <iostream>
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-	// if (argc < 2 || std::strcmp(argv[1], "image") == 0)
-	// {
+	std::cout << ASSETS_PATH;
 
-	// 	std::string fileName(ASSET_PATH("/easy/adrian_clean_semi.jpg"));
-	// 	std::cout << fileName;
 
-	// 	try
-	// 	{
-	// 		cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
-	// 		MaskDetect md;
-	// 		cv::Mat imgToFindFace = md.DetectFace(image);
-	// 		cv:Mat imgToFindFace2;
-	// 		cv::resize(imgToFindFace, imgToFindFace2, cv::Size(), 0.2, 0.2);
+	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
+	{
 
-	// 		cv::imshow("Detected Face", imgToFindFace2);
+		std::string fileName(ASSET_PATH("/easy/adrian_clean_semi.jpg"));
+		std::cout << fileName;
 
-	// 		cv::waitKey(0);
-	// 	}
-	// 	catch (std::exception e)
-	// 	{
-	// 		std::cout << e.what();
-	// 	}
-	// }
+		try
+		{
+			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
+			EyesDetection ed;
+			cv::Mat imgToFindFace;
+			cv::Rect eyes;
+			ed.detect(image, eyes);
+			std::cout << std::endl<< eyes<<std::endl <<std::endl;
+
+			cv::waitKey(0);
+		}
+		catch (std::exception e)
+		{
+			std::cout << e.what();
+		}
+	}
+
 	// else if (std::strcmp(argv[1], "camera") == 0)
 	// {
 	// 	Mat frame;
