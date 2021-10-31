@@ -4,6 +4,7 @@
 #include <cmath>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
+#include <limits>
 
 using namespace cv;
 
@@ -43,7 +44,7 @@ int FaceDetection::findIndexOfBestFace(Mat &image, std::vector<Rect> &faces)
   int imgCenterY = image.cols * 0.5;
 
   int bestFace = -1;
-  float smallestDistance = 9999999;
+  float smallestDistance = std::numeric_limits<float>::max();
   for (int i = 0; i < faces.size(); ++i)
   {
     int centerY = faces[i].x + faces[i].width * 0.5;
