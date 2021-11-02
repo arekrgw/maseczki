@@ -1,29 +1,31 @@
 #include "Resources.h"
 #include "FaceDetection.h"
 #include "EyesDetection.h"
+#include "MaskDetection.h"
+#include "Painter.h"
 #include <iostream>
+#include <opencv2/highgui/highgui.hpp>
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-	std::cout << ASSETS_PATH;
-
-
 	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
 	{
 
-		std::string fileName(ASSET_PATH("/easy/adrian_clean_semi.jpg"));
-		std::cout << fileName;
+		std::string fileName(ASSET_PATH("/arek_pat_none.jpg"));
 
 		try
 		{
 			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
-			EyesDetection ed;
-			cv::Mat imgToFindFace;
-			cv::Rect eyes;
-			ed.detect(image, eyes);
-			std::cout << std::endl<< eyes<<std::endl <<std::endl;
+			MaskDetection maskDetection;
+			Rect face, eyePair, mouth;
 
-			cv::waitKey(0);
+			MaskOn result = maskDetection.detect(image, face, eyePair, mouth);
+
+			Painter::paintFaceCharacteristics(image, face, eyePair, mouth, result);
+
+			imshow("Image", image);
+
+			waitKey(0);
 		}
 		catch (std::exception e)
 		{
@@ -31,38 +33,48 @@ int main(int argc, char** argv)
 		}
 	}
 
-	// else if (std::strcmp(argv[1], "camera") == 0)
-	// {
-	// 	Mat frame;
-	// 	VideoCapture cap;
-	// 	// MaskDetect maskDetect;
-	// 	cap.open(0);
+	else if (std::strcmp(argv[1], "camera") == 0)
+	{
+		Mat frame;
+		VideoCapture cap;
+		MaskDetection maskDetection;
+		cap.open(0);
 
-	// 	if (!cap.isOpened())
-	// 	{
-	// 		std::cerr << "ERROR! Unable to open camera\n";
-	// 		return -1;
-	// 	}
+		if (!cap.isOpened())
+		{
+			std::cerr << "ERROR! Unable to open camera\n";
+			return -1;
+		}
 
-	// 	for (;;)
-	// 	{
-	// 		cap.read(frame);
+		for (;;)
+		{
+			cap.read(frame);
 
-	// 		if (frame.empty())
-	// 		{
-	// 			std::cerr << "ERROR! blank frame grabbed\n";
-	// 			break;
-	// 		}
+			if (frame.empty())
+			{
+				std::cerr << "ERROR! blank frame grabbed\n";
+				break;
+			}
+			Rect face, eyePair, mouth;
 
-	// 		// Mat imgWithFaces = maskDetect.DetectFace(frame);
+			MaskOn result = maskDetection.detect(frame, face, eyePair, mouth);
 
-	// 		// imshow("Live", imgWithFaces);
-	// 		if (waitKey(5) >= 0)
-	// 			break;
-	// 	}
+			Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, result);
 
-	// 	std::cout << "camera";
-	// }
+			if (result == MaskOn::CORRECT)
+			{
+				Painter::paintText(frame, "Mask detected", Scalar(0, 255, 0));
+			}
+			else if (result == MaskOn::NONE)
+			{
+				Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
+			}
+
+			imshow("Live", frame);
+			if (waitKey(5) >= 0)
+				break;
+		}
+	}
 
 	return 0;
 }

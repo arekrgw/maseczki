@@ -5,11 +5,12 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
 
-MouthDetection::MouthDetection() {
+MouthDetection::MouthDetection()
+{
 	loadMouthCascade();
 }
 
-int MouthDetection::detect(Mat& image, Rect& coords)
+int MouthDetection::detect(Mat &image, Rect &coords)
 {
 	if (image.empty())
 	{
@@ -18,46 +19,21 @@ int MouthDetection::detect(Mat& image, Rect& coords)
 
 	std::vector<Rect> mouths;
 
-	Mat croppedImage = image(Rect(0,image.rows/2, image.cols, image.rows/2));
-	//imshow("test", croppedImage);
+	Mat croppedImage = image(Rect(0, image.rows / 2, image.cols, image.rows / 2));
 
 	findAllMouth(croppedImage, mouths);
 
 	if (!mouths.size())
 		return 1;
-	int indexOfBestMouth = findIndexOfBestMouth(croppedImage, mouths);
 
-	coords = mouths[indexOfBestMouth];
+	coords = Rect(mouths[0].x, mouths[0].y + image.rows / 2, mouths[0].width, mouths[0].height);
 
 	return 0;
 }
 
-void MouthDetection::findAllMouth(Mat& image, std::vector<Rect>& mouths)
+void MouthDetection::findAllMouth(Mat &image, std::vector<Rect> &mouths)
 {
-	mouthCascade.detectMultiScale(image, mouths);
-}
-
-int MouthDetection::findIndexOfBestMouth(Mat& image, std::vector<Rect>& mouths)
-{
-	int imgCenterY = image.cols * 0.5;
-	float minDistance = 999999999;
-	int bestMouth = -1;
-	for (int i = 0; i < mouths.size(); ++i)
-	{
-		int centerY = mouths[i].x + mouths[i].width * 0.5;
-		int centerX = mouths[i].y + mouths[i].height * 0.5;
-
-		float distance = sqrt(pow(imgCenterY - centerY, 2));
-
-		if (distance < minDistance)
-		{
-			minDistance = distance;
-			bestMouth = i;
-		}
-	}
-
-
-	return bestMouth;
+	mouthCascade.detectMultiScale(image, mouths, 1.1, 10, CASCADE_DO_CANNY_PRUNING, Size(200, 75));
 }
 
 void MouthDetection::loadMouthCascade()

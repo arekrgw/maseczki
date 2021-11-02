@@ -64,7 +64,7 @@ int FaceDetection::findIndexOfBestFace(Mat &image, std::vector<Rect> &faces)
 
 void FaceDetection::findAllFaces(Mat &image, std::vector<Rect> &faces)
 {
-  faceCascade.detectMultiScale(image, faces, 1.2, 2, CASCADE_DO_CANNY_PRUNING, Size(100, 100));
+  faceCascade.detectMultiScale(image, faces, 1.2, 2, CASCADE_DO_CANNY_PRUNING, Size(300, 400));
 }
 
 Mat FaceDetection::getRoi(Rect &face, Mat &image)

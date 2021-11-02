@@ -9,14 +9,13 @@ using namespace cv;
 
 class MouthDetection
 {
-
 private:
 	CascadeClassifier mouthCascade;
 	void loadMouthCascade();
-	void findAllMouth(Mat& image, std::vector<Rect>& mouths);
-	int findIndexOfBestMouth(Mat& image, std::vector<Rect>& mouths);
+	void findAllMouth(Mat &image, std::vector<Rect> &mouths);
+	int findIndexOfBestMouth(Mat &image, std::vector<Rect> &mouths);
 
 public:
 	MouthDetection();
-	int detect(Mat& image, Rect& coords);
+	int detect(Mat &image, Rect &coords);
 };

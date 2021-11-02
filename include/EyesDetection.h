@@ -13,11 +13,10 @@ class EyesDetection
 private:
 	CascadeClassifier eyesCascade;
 	void loadEyesCascade();
-	int findIndexOfBestEyes(Mat& image, std::vector<Rect>& eyes);
-	void findAllEyes(Mat& image, std::vector<Rect>& eyes);
-
+	int findIndexOfBestEyes(Mat &image, std::vector<Rect> &eyes);
+	void findAllEyes(Mat &image, std::vector<Rect> &eyes);
 
 public:
 	EyesDetection();
-	int detect(Mat& image, Rect& coords);
+	int detect(Mat &image, Rect &coords);
 };
