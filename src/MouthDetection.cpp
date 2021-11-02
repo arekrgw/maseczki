@@ -18,11 +18,14 @@ int MouthDetection::detect(Mat& image, Rect& coords)
 
 	std::vector<Rect> mouths;
 
-	findAllMouth(image, mouths);
+	Mat croppedImage = image(Rect(0,image.rows/2, image.cols, image.rows/2));
+	//imshow("test", croppedImage);
+
+	findAllMouth(croppedImage, mouths);
 
 	if (!mouths.size())
 		return 1;
-	int indexOfBestMouth = findIndexOfBestMouth(image, mouths);
+	int indexOfBestMouth = findIndexOfBestMouth(croppedImage, mouths);
 
 	coords = mouths[indexOfBestMouth];
 
