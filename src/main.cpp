@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
 	{
 
-		std::string fileName(ASSET_PATH("/arek_pat_none.jpg"));
+		std::string fileName(ASSET_PATH("/arek_clean_full.jpg"));
 
 		try
 		{
