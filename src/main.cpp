@@ -2,6 +2,7 @@
 #include "FaceDetection.h"
 #include "EyesDetection.h"
 #include "MaskDetection.h"
+#include "MaskColor.h"
 #include "Painter.h"
 #include <iostream>
 #include <opencv2/highgui/highgui.hpp>
@@ -11,9 +12,28 @@ int main(int argc, char **argv)
 	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
 	{
 
-		std::string fileName(ASSET_PATH("/arek_clean_full.jpg"));
+		std::string fileName("C:/Users/Adrian/source/repos/maseczeki-pk/assets/easy/arek_clean_full.jpg");
+	
+		MaskColor mask;
+
 
 		try
+		{
+			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
+			
+			mask.detect(image);
+
+			
+
+			waitKey(0);
+		}
+		catch (std::exception e)
+		{
+			std::cout << e.what();
+		}
+	}
+
+	/*	try
 		{
 			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
 			MaskDetection maskDetection;
@@ -75,6 +95,6 @@ int main(int argc, char **argv)
 				break;
 		}
 	}
-
+	*/
 	return 0;
 }
