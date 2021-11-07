@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
 	{
 
-		std::string fileName("C:/Users/Adrian/source/repos/maseczeki-pk/assets/easy/arek_clean_full.jpg");
+		std::string fileName("C:/Users/Adrian/source/repos/maseczeki-pk/assets/easy/arek_clean_off.jpg");
 	
 		MaskColor mask;
 

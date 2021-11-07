@@ -10,7 +10,7 @@ class MaskColor {
 	private:
 		Mat upperHalf(Mat& image);
 		Mat lowerHalf(Mat& image);
-		float count(Mat& image);
+		Scalar count(Mat& image);
 
 	public:
 		int detect(Mat& image);
