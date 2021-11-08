@@ -27,9 +27,9 @@ cv:Mat imgToFindFace2;
 		if (countUpper[i] - countLower[i] < 0) color += countLower[i] - countUpper[i];
 		else color +=countUpper[i] - countLower[i];
 	}
-	std::cout << std::endl << std::endl << color / 3 << std::endl;
-	if (color >= 30) return 1;
-	return 0;
+	color /= 3;
+	if (color >= 30) return 0;
+	return 1;
 }
 
 
