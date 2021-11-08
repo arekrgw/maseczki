@@ -8,61 +8,14 @@
 #include <string>
 #include <opencv2/highgui/highgui.hpp>
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
 	{
 
-		std::string fileName("C:/Users/Adrian/source/repos/maseczeki-pk/assets/easy/arek_clean_off.jpg");
-	
-		MaskColor mask;
+		std::string fileName(ASSET_PATH("/arek_clean_full.jpg"));
 
-
-		Mat frame;
-		VideoCapture cap;
-		MaskDetection maskDetection;
-		cap.open(0);
-
-		if (!cap.isOpened())
-		{
-			std::cerr << "ERROR! Unable to open camera\n";
-			return -1;
-		}
-
-		for (;;)
-		{
-			cap.read(frame);
-
-			if (frame.empty())
-			{
-				std::cerr << "ERROR! blank frame grabbed\n";
-				break;
-			}
-			Rect face, eyePair, mouth;
-
-			MaskOn result = maskDetection.detect(frame, face, eyePair, mouth);
-
-			Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, result);
-
-			MaskColor color;
-			int colorValue = color.detect(frame);
-			std::string col = std::to_string(colorValue);
-			if (result == MaskOn::CORRECT)
-			{
-				Painter::paintText(frame, col, Scalar(0, 255, 0));
-			}
-			else if (result == MaskOn::NONE)
-			{
-				Painter::paintText(frame, col, Scalar(0, 0, 255));
-			}
-
-			imshow("Live", frame);
-			if (waitKey(5) >= 0)
-				break;
-		}
-	}
-
-	/*	try
+		try
 		{
 			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
 			MaskDetection maskDetection;
@@ -124,6 +77,6 @@ int main(int argc, char **argv)
 				break;
 		}
 	}
-	*/
+
 	return 0;
 }
