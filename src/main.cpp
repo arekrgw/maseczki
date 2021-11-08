@@ -5,6 +5,7 @@
 #include "MaskColor.h"
 #include "Painter.h"
 #include <iostream>
+#include <string>
 #include <opencv2/highgui/highgui.hpp>
 
 int main(int argc, char **argv)
@@ -17,19 +18,47 @@ int main(int argc, char **argv)
 		MaskColor mask;
 
 
-		try
+		Mat frame;
+		VideoCapture cap;
+		MaskDetection maskDetection;
+		cap.open(0);
+
+		if (!cap.isOpened())
 		{
-			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
-			
-			mask.detect(image);
-
-			
-
-			waitKey(0);
+			std::cerr << "ERROR! Unable to open camera\n";
+			return -1;
 		}
-		catch (std::exception e)
+
+		for (;;)
 		{
-			std::cout << e.what();
+			cap.read(frame);
+
+			if (frame.empty())
+			{
+				std::cerr << "ERROR! blank frame grabbed\n";
+				break;
+			}
+			Rect face, eyePair, mouth;
+
+			MaskOn result = maskDetection.detect(frame, face, eyePair, mouth);
+
+			Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, result);
+
+			MaskColor color;
+			int colorValue = color.detect(frame);
+			std::string col = std::to_string(colorValue);
+			if (result == MaskOn::CORRECT)
+			{
+				Painter::paintText(frame, col, Scalar(0, 255, 0));
+			}
+			else if (result == MaskOn::NONE)
+			{
+				Painter::paintText(frame, col, Scalar(0, 0, 255));
+			}
+
+			imshow("Live", frame);
+			if (waitKey(5) >= 0)
+				break;
 		}
 	}
 
