@@ -2,6 +2,7 @@
 #include "FaceDetection.h"
 #include "EyesDetection.h"
 #include "MouthDetection.h"
+#include "MaskColor.h"
 #include <iostream>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
@@ -32,6 +33,12 @@ MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth)
   {
     return MaskOn::NONE;
   }
+
+  int maskCol = maskColor.detect(croppedFace);
+  if (maskCol==1) {
+      return MaskOn::NONE;
+  }
+
 
   return MaskOn::CORRECT;
 }
