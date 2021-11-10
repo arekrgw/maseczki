@@ -27,6 +27,7 @@ add_executable(maseczki-pk
 	src/Painter.cpp
 	src/NoseDetection.cpp
 	src/MaskColor.cpp
+	src/Properties.cpp
 	# You can put here your .h and .cpp files to expand the example.
 )
 
