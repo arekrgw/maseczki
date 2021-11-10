@@ -8,7 +8,7 @@
 
 using namespace cv;
 
-MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth)
+MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose)
 {
   Mat croppedFace;
 
@@ -32,6 +32,8 @@ MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth)
   {
     return MaskOn::NONE;
   }
+
+  int noseDetected = noseDetection.detect(croppedFace, nose);
 
   return MaskOn::CORRECT;
 }

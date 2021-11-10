@@ -25,6 +25,8 @@ add_executable(maseczki-pk
 	src/MouthDetection.cpp
 	src/MaskDetection.cpp
 	src/Painter.cpp
+	src/NoseDetection.cpp
+
 	# You can put here your .h and .cpp files to expand the example.
 )
 

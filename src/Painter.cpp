@@ -2,7 +2,7 @@
 #include "Painter.h"
 #include "MaskOn.h"
 
-void Painter::paintFaceCharacteristics(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, MaskOn status)
+void Painter::paintFaceCharacteristics(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose, MaskOn status)
 {
   Scalar color(255, 0, 0);
 
@@ -26,6 +26,13 @@ void Painter::paintFaceCharacteristics(Mat &image, Rect &face, Rect &eyePair, Re
     if (!mouth.empty())
     {
       rectangle(image, Rect(mouth.x + face.x, mouth.y + face.y, mouth.width, mouth.height), color, 7, 8, 0);
+    }
+
+    if (!nose.empty())
+    {
+      rectangle(image, Rect(nose.x + face.x, nose.y + face.y, nose.width, nose.height), color, 7, 8, 0);
+    }else{
+      putText(image, "nosek lalaala", Point(18, 70), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 255, 0), 2);
     }
   }
 }
