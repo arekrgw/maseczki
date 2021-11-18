@@ -31,7 +31,9 @@ void Painter::paintFaceCharacteristics(Mat &image, Rect &face, Rect &eyePair, Re
     if (!nose.empty())
     {
       rectangle(image, Rect(nose.x + face.x, nose.y + face.y, nose.width, nose.height), color, 7, 8, 0);
-    }else{
+    }
+    else
+    {
       putText(image, "nosek lalaala", Point(18, 70), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 255, 0), 2);
     }
   }
