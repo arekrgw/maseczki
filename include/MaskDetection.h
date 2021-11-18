@@ -5,7 +5,7 @@
 #include "EyesDetection.h"
 #include "MouthDetection.h"
 #include "NoseDetection.h"
-
+#include "MaskColor.h"
 
 using namespace cv;
 
@@ -16,6 +16,7 @@ private:
   EyesDetection eyesDetection;
   MouthDetection mouthDetection;
   NoseDetection noseDetection;
+  MaskColor maskColor;
 
 public:
   MaskOn detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose);

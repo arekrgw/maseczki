@@ -1,6 +1,4 @@
 build
-build_opencv
-opencv-4.5.4
 .idea
 .vscode
 .DS_Store
