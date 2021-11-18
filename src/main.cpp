@@ -19,11 +19,11 @@ int main(int argc, char** argv)
 		{
 			cv::Mat image = cv::imread(fileName, cv::IMREAD_COLOR);
 			MaskDetection maskDetection;
-			Rect face, eyePair, mouth;
+			Rect face, eyePair, mouth, nose;
 
-			MaskOn result = maskDetection.detect(image, face, eyePair, mouth);
+			MaskOn result = maskDetection.detect(image, face, eyePair, mouth, nose);
 
-			Painter::paintFaceCharacteristics(image, face, eyePair, mouth, result);
+			Painter::paintFaceCharacteristics(image, face, eyePair, mouth, nose, result);
 
 			imshow("Image", image);
 
@@ -57,11 +57,11 @@ int main(int argc, char** argv)
 				std::cerr << "ERROR! blank frame grabbed\n";
 				break;
 			}
-			Rect face, eyePair, mouth;
+			Rect face, eyePair, mouth,nose;
 
-			MaskOn result = maskDetection.detect(frame, face, eyePair, mouth);
+			MaskOn result = maskDetection.detect(frame, face, eyePair, mouth,nose);
 
-			Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, result);
+			Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, nose, result);
 
 			if (result == MaskOn::CORRECT)
 			{
