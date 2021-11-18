@@ -1,6 +1,7 @@
 #include "Resources.h"
 #include "FaceDetection.h"
 #include "EyesDetection.h"
+#include "Properties.h"
 #include "MaskDetection.h"
 #include "MaskColor.h"
 #include "Painter.h"
@@ -8,7 +9,7 @@
 #include <string>
 #include <opencv2/highgui/highgui.hpp>
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 	if (argc < 2 || std::strcmp(argv[1], "image") == 0)
 	{
@@ -49,6 +50,10 @@ int main(int argc, char** argv)
 			return -1;
 		}
 
+		Properties props;
+
+		props.calculateProperties(cap.get(CAP_PROP_FRAME_WIDTH), cap.get(CAP_PROP_FRAME_HEIGHT));
+
 		for (;;)
 		{
 			cap.read(frame);
@@ -58,9 +63,11 @@ int main(int argc, char** argv)
 				std::cerr << "ERROR! blank frame grabbed\n";
 				break;
 			}
-			Rect face, eyePair, mouth,nose;
+			Rect face, eyePair, mouth, nose;
 
-			MaskOn result = maskDetection.detect(frame, face, eyePair, mouth,nose);
+			MaskOn result = maskDetection.detect(frame, face, eyePair, mouth, nose);
+
+			Painter::paintOutline(frame, props);
 
 			Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, nose, result);
 

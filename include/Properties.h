@@ -10,6 +10,7 @@ public:
   int width;
   int height;
   int faceOutlineHeight;
+  int faceOutlineWidth;
   int minimalFaceHeight;
   int minimalFaceWidth;
   int minimalEyesWidth;

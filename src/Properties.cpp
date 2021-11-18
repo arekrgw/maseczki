@@ -10,16 +10,24 @@ using namespace cv;
 
 Properties::Properties()
 {
-  faceOutline = imread(ASSET_PATH("/faceoutline.png"), cv::IMREAD_COLOR);
+  faceOutline = imread(ASSET_PATH("/faceoutline.png"), IMREAD_UNCHANGED);
 }
 
 void Properties::calculateProperties(double width, double height)
 {
-  width = static_cast<int>(width);
-  height = static_cast<int>(height);
+  this->width = static_cast<int>(width);
+  this->height = static_cast<int>(height);
+  calculateOutline();
 }
 
 void Properties::calculateOutline()
 {
   faceOutlineHeight = floor(height * 0.6);
+  float hRatio = faceOutline.rows / faceOutlineHeight;
+
+  faceOutlineWidth = faceOutline.cols * hRatio;
+  Mat resizedOutline;
+  resize(faceOutline, resizedOutline, Size(faceOutlineWidth, faceOutlineHeight));
+
+  faceOutline = resizedOutline;
 }
