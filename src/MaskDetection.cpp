@@ -35,11 +35,17 @@ MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth,
   }
 
   int noseDetected = noseDetection.detect(croppedFace, nose);
-  int maskCol = maskColor.detect(croppedFace);
-  if (maskCol == 1)
+
+  if (!noseDetected)
   {
     return MaskOn::NONE;
   }
 
+  /*int maskCol = maskColor.detect(croppedFace);
+  if (maskCol == 1)
+  {
+    return MaskOn::NONE;
+  }
+*/
   return MaskOn::CORRECT;
 }
