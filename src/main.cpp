@@ -42,7 +42,6 @@ int main(int argc, char **argv)
 		VideoCapture cap;
 		MaskDetection maskDetection;
 		cap.open(0);
-		std::cout << cap.get(CAP_PROP_FRAME_WIDTH);
 
 		if (!cap.isOpened())
 		{
