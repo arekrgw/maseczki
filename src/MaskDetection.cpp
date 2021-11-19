@@ -6,8 +6,15 @@
 #include <iostream>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
+#include "Properties.h"
 
 using namespace cv;
+
+MaskDetection::MaskDetection(Properties &props)
+{
+  this->props = props;
+  faceDetection = FaceDetection(props);
+}
 
 MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose)
 {

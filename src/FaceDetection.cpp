@@ -5,12 +5,14 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
 #include <limits>
+#include "Properties.h"
 
 using namespace cv;
 
-FaceDetection::FaceDetection()
+FaceDetection::FaceDetection(Properties &props)
 {
   loadFaceCascade();
+  this->props = props;
 }
 
 int FaceDetection::detect(Mat &image, Mat &output, Rect &coords)
@@ -64,7 +66,7 @@ int FaceDetection::findIndexOfBestFace(Mat &image, std::vector<Rect> &faces)
 
 void FaceDetection::findAllFaces(Mat &image, std::vector<Rect> &faces)
 {
-  faceCascade.detectMultiScale(image, faces, 1.2, 2, CASCADE_DO_CANNY_PRUNING, Size(300, 400));
+  faceCascade.detectMultiScale(image, faces, 1.2, 2, CASCADE_DO_CANNY_PRUNING, Size(props.faceOutlineWidth * 0.9, props.faceOutlineHeight * 0.9));
 }
 
 Mat FaceDetection::getRoi(Rect &face, Mat &image)

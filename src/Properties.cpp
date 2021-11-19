@@ -22,7 +22,7 @@ void Properties::calculateProperties(double width, double height)
 
 void Properties::calculateOutline()
 {
-  faceOutlineHeight = floor(height * 0.6);
+  faceOutlineHeight = floor(height * 0.8);
   std::cout << faceOutlineHeight << "\n";
   float hRatio = static_cast<float>(faceOutlineHeight) / faceOutline.rows;
 

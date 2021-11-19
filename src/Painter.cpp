@@ -43,7 +43,7 @@ void Painter::paintText(Mat &image, std::string text, Scalar color)
 
 void Painter::paintOutline(Mat &image, Properties &props)
 {
-  Point location(0, 0);
+  Point location(image.cols / 2 - (props.faceOutline.cols / 2), image.rows / 2 - (props.faceOutline.rows / 2));
   // Mat mask;
   // std::vector<Mat> layers;
 
