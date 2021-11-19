@@ -22,16 +22,19 @@ void Properties::calculateProperties(double width, double height)
 
 void Properties::calculateOutline()
 {
-  faceOutlineHeight = floor(height * 0.8);
-  std::cout << faceOutlineHeight << "\n";
+
+  if (height < 800)
+  {
+    faceOutlineHeight = floor(height * 0.95);
+  }
+  else
+  {
+    faceOutlineHeight = floor(height * 0.8);
+  }
+
   float hRatio = static_cast<float>(faceOutlineHeight) / faceOutline.rows;
 
-  std::cout << faceOutline.rows << "\n";
-  std::cout << hRatio << "\n";
-
   faceOutlineWidth = faceOutline.cols * hRatio;
-
-  std::cout << faceOutlineWidth << "\n";
 
   Mat resizedOutline;
   resize(faceOutline, resizedOutline, Size(faceOutlineWidth, faceOutlineHeight), INTER_LINEAR);
