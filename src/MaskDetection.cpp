@@ -14,6 +14,9 @@ MaskDetection::MaskDetection(Properties &props)
 {
   this->props = props;
   faceDetection = FaceDetection(props);
+  eyesDetection = EyesDetection(props);
+  mouthDetection = MouthDetection(props);
+  noseDetection = NoseDetection(props);
 }
 
 MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose)
