@@ -34,7 +34,7 @@ int NoseDetection::detect(Mat &image, Rect &coords)
 
 void NoseDetection::findAllNose(Mat &image, std::vector<Rect> &nose)
 {
-    noseCascade.detectMultiScale(image, nose, 1.4, 4, CASCADE_DO_CANNY_PRUNING, Size(props.faceOutlineWidth * 0.15, props.faceOutlineWidth * 0.15), Size(props.faceOutlineWidth * 0.30, props.faceOutlineWidth * 0.30));
+    noseCascade.detectMultiScale(image, nose, 1.4, 4, CASCADE_DO_CANNY_PRUNING, Size(props.faceOutlineWidth * 0.1, props.faceOutlineWidth * 0.1), Size(props.faceOutlineWidth * 0.25, props.faceOutlineWidth * 0.25));
 }
 
 void NoseDetection::loadNoseCascade()

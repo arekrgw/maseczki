@@ -34,7 +34,7 @@ int MouthDetection::detect(Mat &image, Rect &coords)
 
 void MouthDetection::findAllMouth(Mat &image, std::vector<Rect> &mouths)
 {
-	mouthCascade.detectMultiScale(image, mouths, 1.4, 4, CASCADE_DO_CANNY_PRUNING, Size(props.faceOutlineWidth * 0.4, props.faceOutlineHeight * 0.15), Size(props.faceOutlineWidth * 0.6, props.faceOutlineHeight * 0.20));
+	mouthCascade.detectMultiScale(image, mouths, 1.4, 4, CASCADE_DO_CANNY_PRUNING, Size(props.faceOutlineWidth * 0.2, props.faceOutlineWidth * 0.15), Size(props.faceOutlineWidth * 0.4, props.faceOutlineWidth * 0.35));
 }
 
 void MouthDetection::loadMouthCascade()
