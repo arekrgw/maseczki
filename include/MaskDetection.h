@@ -6,6 +6,7 @@
 #include "MouthDetection.h"
 #include "NoseDetection.h"
 #include "MaskColor.h"
+#include "Properties.h"
 
 using namespace cv;
 
@@ -17,7 +18,9 @@ private:
   MouthDetection mouthDetection;
   NoseDetection noseDetection;
   MaskColor maskColor;
+  Properties props;
 
 public:
+  MaskDetection(Properties &props);
   MaskOn detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose);
 };

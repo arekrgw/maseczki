@@ -5,9 +5,10 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
 
-MouthDetection::MouthDetection()
+MouthDetection::MouthDetection(Properties &props)
 {
 	loadMouthCascade();
+	this->props = props;
 }
 
 int MouthDetection::detect(Mat &image, Rect &coords)
@@ -33,7 +34,7 @@ int MouthDetection::detect(Mat &image, Rect &coords)
 
 void MouthDetection::findAllMouth(Mat &image, std::vector<Rect> &mouths)
 {
-	mouthCascade.detectMultiScale(image, mouths, 1.1, 10, CASCADE_DO_CANNY_PRUNING, Size(200, 75));
+	mouthCascade.detectMultiScale(image, mouths, 1.4, 4, CASCADE_DO_CANNY_PRUNING, Size(props.faceOutlineWidth * 0.2, props.faceOutlineWidth * 0.15), Size(props.faceOutlineWidth * 0.4, props.faceOutlineWidth * 0.35));
 }
 
 void MouthDetection::loadMouthCascade()

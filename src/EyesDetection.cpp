@@ -5,9 +5,10 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
 
-EyesDetection::EyesDetection()
+EyesDetection::EyesDetection(Properties &props)
 {
     loadEyesCascade();
+    this->props = props;
 }
 
 int EyesDetection::detect(Mat &image, Rect &coords)
@@ -31,7 +32,7 @@ int EyesDetection::detect(Mat &image, Rect &coords)
 
 void EyesDetection::findAllEyes(Mat &image, std::vector<Rect> &eyes)
 {
-    eyesCascade.detectMultiScale(image, eyes, 1.2, 10, CASCADE_DO_CANNY_PRUNING, Size(250, 75));
+    eyesCascade.detectMultiScale(image, eyes, 1.4, 4, CASCADE_DO_CANNY_PRUNING, Size(props.faceOutlineWidth * 0.4, props.faceOutlineHeight * 0.07), Size(props.faceOutlineWidth * 0.65, props.faceOutlineHeight * 0.15));
 }
 
 void EyesDetection::loadEyesCascade()

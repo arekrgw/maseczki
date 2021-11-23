@@ -5,9 +5,10 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
 
-NoseDetection::NoseDetection()
+NoseDetection::NoseDetection(Properties &props)
 {
     loadNoseCascade();
+    this->props = props;
 }
 
 int NoseDetection::detect(Mat &image, Rect &coords)
@@ -33,7 +34,7 @@ int NoseDetection::detect(Mat &image, Rect &coords)
 
 void NoseDetection::findAllNose(Mat &image, std::vector<Rect> &nose)
 {
-    noseCascade.detectMultiScale(image, nose, 1.2, 10, CASCADE_DO_CANNY_PRUNING, Size(30, 10));
+    noseCascade.detectMultiScale(image, nose, 1.4, 4, CASCADE_DO_CANNY_PRUNING, Size(props.faceOutlineWidth * 0.1, props.faceOutlineWidth * 0.1), Size(props.faceOutlineWidth * 0.25, props.faceOutlineWidth * 0.25));
 }
 
 void NoseDetection::loadNoseCascade()
