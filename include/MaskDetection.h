@@ -20,7 +20,14 @@ private:
   MaskColor maskColor;
   Properties props;
 
+  std::chrono::steady_clock start;
+  int frameCount;
+  int correctFrameCount;
+
+
 public:
+  void StartTimeCounter();
+  bool CheckTimeCounter();
   MaskDetection(Properties &props);
   MaskOn detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose);
 };
