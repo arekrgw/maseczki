@@ -30,11 +30,12 @@ int main(int argc, char **argv)
 	}
 
 	Properties props;
+	Timer timer = Timer();
 
 	props.calculateProperties(cap.get(CAP_PROP_FRAME_WIDTH), cap.get(CAP_PROP_FRAME_HEIGHT));
 	MaskDetection maskDetection(props);
 
-	Timer timer = Timer();
+	
 
 	for (;;)
 	{
