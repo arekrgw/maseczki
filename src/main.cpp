@@ -11,7 +11,7 @@
 
 int main(int argc, char **argv)
 {
-	Mat frame;
+	Mat frame, org;
 	VideoCapture cap;
 	cap.open(0);
 
@@ -28,9 +28,11 @@ int main(int argc, char **argv)
 
 	for (;;)
 	{
-		Mat raw;
+		Mat raw, rawBlurred;
+
 		cap.read(raw);
-		flip(raw, frame, 1);
+		GaussianBlur(raw, rawBlurred, Size(1, 1), 0);
+		flip(rawBlurred, frame, 1);
 
 		if (frame.empty())
 		{
