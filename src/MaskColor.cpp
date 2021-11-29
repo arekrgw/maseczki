@@ -32,20 +32,20 @@ int MaskColor::detect(Mat &image)
 			color += countUpper[i] - countLower[i];
 	}
 	color /= 3;
-	if (color >= 30)
+	if (color >= 50)
 		return 0;
 	return 1;
 }
 
 Mat MaskColor::upperHalfFn(Mat &image)
 {
-	Mat croppedImage = image(Rect(0, 0, image.cols, image.rows / 2));
+	Mat croppedImage = image(Rect(image.cols*0.4,image.rows*0.1, image.cols*0.2, image.rows*0.2));
 	return croppedImage;
 }
 
 Mat MaskColor::lowerHalfFn(Mat &image)
 {
-	Mat croppedImage = image(Rect(0, image.rows / 2, image.cols, image.rows / 2));
+	Mat croppedImage = image(Rect(image.cols * 0.4, image.rows*0.7, image.cols * 0.2, image.rows * 0.2));
 	return croppedImage;
 }
 
