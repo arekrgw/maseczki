@@ -9,14 +9,14 @@
 #include <iostream>
 #include <string>
 #include <opencv2/highgui/highgui.hpp>
-#include <conio.h>
+
 
 int main(int argc, char **argv)
 {
 	int correctCount = 0;
 	int frameCount = 0;
 	bool start = false;
-	bool isOn = NULL;
+	bool isOn = false;
 
 	Mat frame, org;
 	VideoCapture cap;
@@ -71,9 +71,10 @@ int main(int argc, char **argv)
 				std::cout << percent << "%" << std::endl;
 				if (percent >= 12) {
 					isOn = true;
-					std::cout << "maska jest zalozona";
+					std::cout << "maska jest zalozona"<<std::endl;
 				}
 				else {
+					std::cout << "maski nie wykryto" <<std::endl;
 					isOn = false;
 				}
 				start = false;
@@ -84,6 +85,8 @@ int main(int argc, char **argv)
 		if (result == MaskOn::CORRECT)
 		{
 			if (!start) {
+				std::cout << "start wykrywania"<<std::endl;
+				frameCount = 0; correctCount = 0;
 				start = true;
 				timer.StartTimeCounter();
 			}

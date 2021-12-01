@@ -30,7 +30,7 @@ MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth,
 
   if (faceDetected)
   {
-    return MaskOn::NONE;
+    return MaskOn::NO_FACE;
   }
 
   int eyesDetected = eyesDetection.detect(croppedFace, eyePair);

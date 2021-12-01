@@ -4,7 +4,7 @@
 
 void Timer::StartTimeCounter()
 {
-    Timer::start = std::chrono::high_resolution_clock::now();
+    start = std::chrono::high_resolution_clock::now();
     return;
 }
 
