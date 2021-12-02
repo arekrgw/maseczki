@@ -10,7 +10,6 @@
 #include <string>
 #include <opencv2/highgui/highgui.hpp>
 
-
 int main(int argc, char **argv)
 {
 	int correctCount = 0;
@@ -21,7 +20,6 @@ int main(int argc, char **argv)
 	Mat frame, org;
 	VideoCapture cap;
 	cap.open(0);
-	
 
 	if (!cap.isOpened())
 	{
@@ -34,8 +32,6 @@ int main(int argc, char **argv)
 
 	props.calculateProperties(cap.get(CAP_PROP_FRAME_WIDTH), cap.get(CAP_PROP_FRAME_HEIGHT));
 	MaskDetection maskDetection(props);
-
-	
 
 	for (;;)
 	{
@@ -57,59 +53,61 @@ int main(int argc, char **argv)
 		Painter::paintOutline(frame, props);
 
 		Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, nose, result);
-		
-		if (isOn && !start) {
+
+		if (isOn && !start)
+		{
 			Painter::paintText(frame, "Maska detected", Scalar(0, 255, 0));
 		}
-		else if(!isOn && !start) {
+		else if (!isOn && !start)
+		{
 			Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
 		}
 
-		
-		
-		
-		if (start) {
+		if (start)
+		{
 			Painter::paintTextxy(frame, Point(12, 460), "Detection started", Scalar(0, 120, 255));
 
-			if (timer.CheckTimeCounter(5)) {
+			if (timer.CheckTimeCounter(5))
+			{
 				int percent = (correctCount * 100) / frameCount;
 				std::cout << percent << "%" << std::endl;
-				if (percent >= 12) {
+				if (percent >= 12)
+				{
 					isOn = true;
-					std::cout << "maska jest zalozona"<<std::endl;
+					std::cout << "maska jest zalozona" << std::endl;
 				}
-				else {
-					std::cout << "maski nie wykryto" <<std::endl;
+				else
+				{
+					std::cout << "maski nie wykryto" << std::endl;
 					isOn = false;
 				}
 				timer.StartTimeCounter();
 				start = false;
 			}
 		}
-		
 
 		if (result == MaskOn::CORRECT)
 		{
-			if (!start && timer.CheckTimeCounter(3)) {
-				
-				std::cout << "start wykrywania"<<std::endl;
-				frameCount = 1; correctCount = 0;
+			if (!start && timer.CheckTimeCounter(3))
+			{
+
+				std::cout << "start wykrywania" << std::endl;
+				frameCount = 1;
+				correctCount = 0;
 				start = true;
 				isOn = false;
 				timer.StartTimeCounter();
 			}
-			else {
+			else
+			{
 				frameCount++;
 				correctCount++;
 			}
-			
-			
-			
-			
 		}
 		else if (result == MaskOn::NONE)
 		{
-			if (start) {
+			if (start)
+			{
 				frameCount++;
 			}
 			//Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
