@@ -54,11 +54,12 @@ int main(int argc, char **argv)
 
 		Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, nose, result);
 
-		
-		if (start) {
+		if (start)
+		{
 			Painter::paintText(frame, "Detection started", Scalar(0, 120, 255));
 		}
-		else if (detectionFin) {
+		else if (detectionFin)
+		{
 			Painter::paintText(frame, "Fit face into outline...", Scalar(255, 255, 255));
 		}
 		else if (isOn && !start)
@@ -69,20 +70,19 @@ int main(int argc, char **argv)
 		{
 			Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
 		}
-		
-		
-		if (timer.CheckTimeCounter(3) && !start) {
+
+		if (timer.CheckTimeCounter(3) && !start)
+		{
 			detectionFin = true;
 		}
 
 		if (start)
 		{
-			
 
 			if (timer.CheckTimeCounter(5))
 			{
 				int percent = (correctCount * 100) / frameCount;
-				std::cout << percent << "% " << frameCount+correctCount<< std::endl;
+				std::cout << percent << "% " << frameCount + correctCount << std::endl;
 				if (percent >= PASS_PRECENTAGE_THRESHOLD && frameCount + correctCount > MINIMAL_FRAME_THRESHOLD)
 				{
 					isOn = true;
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
 		{
 			if (!start && timer.CheckTimeCounter(3))
 			{
-				
+
 				std::cout << "start wykrywania" << std::endl;
 				frameCount = 1;
 				correctCount = 0;
@@ -123,7 +123,6 @@ int main(int argc, char **argv)
 			{
 				frameCount++;
 			}
-			//Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
 		}
 
 		imshow("Live", frame);
