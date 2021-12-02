@@ -44,14 +44,7 @@ void Painter::paintText(Mat &image, std::string text, Scalar color)
 void Painter::paintOutline(Mat &image, Properties &props)
 {
   Point location(image.cols / 2 - (props.faceOutline.cols / 2), image.rows / 2 - (props.faceOutline.rows / 2));
-  // Mat mask;
-  // std::vector<Mat> layers;
 
-  // split(props.faceOutline, layers); // seperate channels
-  // Mat rgb[3] = {layers[0], layers[1], layers[2]};
-  // mask = layers[3];                 // png's alpha channel used as mask
-  // merge(rgb, 3, props.faceOutline); // put together the RGB channels, now transp insn't transparent
-  // props.faceOutline.copyTo(image.rowRange(location.y, location.y + props.faceOutline.rows).colRange(location.x, location.x + props.faceOutline.cols), mask);
   for (int y = max(location.y, 0); y < image.rows; ++y)
   {
     int fY = y - location.y;
