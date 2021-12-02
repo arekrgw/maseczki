@@ -41,6 +41,12 @@ void Painter::paintText(Mat &image, std::string text, Scalar color)
   putText(image, text, Point(18, 40), FONT_HERSHEY_SIMPLEX, 1, color, 2);
 }
 
+void Painter::paintTextxy(Mat& image,Point& point ,std::string text, Scalar color)
+{
+    putText(image, text, point, FONT_HERSHEY_SIMPLEX, 1, color, 2);
+}
+
+
 void Painter::paintOutline(Mat &image, Properties &props)
 {
   Point location(image.cols / 2 - (props.faceOutline.cols / 2), image.rows / 2 - (props.faceOutline.rows / 2));

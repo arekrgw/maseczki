@@ -14,7 +14,7 @@
 int main(int argc, char **argv)
 {
 	int correctCount = 0;
-	int frameCount = 0;
+	int frameCount = 1;
 	bool start = false;
 	bool isOn = false;
 
@@ -57,16 +57,21 @@ int main(int argc, char **argv)
 		Painter::paintOutline(frame, props);
 
 		Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, nose, result);
-
-		if (isOn) {
+		
+		if (isOn && !start) {
 			Painter::paintText(frame, "Maska detected", Scalar(0, 255, 0));
 		}
-		else if(!isOn) {
+		else if(!isOn && !start) {
 			Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
 		}
+
+		
+		
 		
 		if (start) {
-			if (timer.CheckTimeCounter(5) && start) {
+			Painter::paintTextxy(frame, Point(12, 460), "Detection started", Scalar(0, 120, 255));
+
+			if (timer.CheckTimeCounter(5)) {
 				int percent = (correctCount * 100) / frameCount;
 				std::cout << percent << "%" << std::endl;
 				if (percent >= 12) {
@@ -77,6 +82,7 @@ int main(int argc, char **argv)
 					std::cout << "maski nie wykryto" <<std::endl;
 					isOn = false;
 				}
+				timer.StartTimeCounter();
 				start = false;
 			}
 		}
@@ -84,10 +90,12 @@ int main(int argc, char **argv)
 
 		if (result == MaskOn::CORRECT)
 		{
-			if (!start) {
+			if (!start && timer.CheckTimeCounter(3)) {
+				
 				std::cout << "start wykrywania"<<std::endl;
-				frameCount = 0; correctCount = 0;
+				frameCount = 1; correctCount = 0;
 				start = true;
+				isOn = false;
 				timer.StartTimeCounter();
 			}
 			else {
@@ -96,7 +104,7 @@ int main(int argc, char **argv)
 			}
 			
 			
-			//Painter::paintText(frame, "Mask detected", Scalar(0, 255, 0));
+			
 			
 		}
 		else if (result == MaskOn::NONE)
