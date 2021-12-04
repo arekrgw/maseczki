@@ -31,6 +31,7 @@ add_executable(maseczki-pk
 	src/Timer.cpp
 	src/DetectionTimer.cpp
 	src/Camera.cpp
+	src/Executor.cpp
 	# You can put here your .h and .cpp files to expand the example.
 )
 
