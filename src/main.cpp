@@ -9,14 +9,11 @@
 #include <iostream>
 #include <string>
 #include <opencv2/highgui/highgui.hpp>
+#include "DetectionTimer.h"
 
 int main(int argc, char **argv)
 {
-	int correctCount = 0;
-	int frameCount = 1;
-	bool start = false;
-	bool isOn = false;
-	bool detectionFin = true;
+
 	Mat frame, org;
 	VideoCapture cap;
 	cap.open(0);
@@ -28,10 +25,11 @@ int main(int argc, char **argv)
 	}
 
 	Properties props;
-	Timer timer = Timer();
 
 	props.calculateProperties(cap.get(CAP_PROP_FRAME_WIDTH), cap.get(CAP_PROP_FRAME_HEIGHT));
 	MaskDetection maskDetection(props);
+
+	DetectionTimer detectionTimer;
 
 	for (;;)
 	{
@@ -54,76 +52,26 @@ int main(int argc, char **argv)
 
 		Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, nose, result);
 
-		if (start)
+		DetectionTimer::DetectionStatus status = detectionTimer.checkTimer();
+
+		if (status == DetectionTimer::STARTED)
 		{
 			Painter::paintText(frame, "Detection started", Scalar(0, 120, 255));
 		}
-		else if (detectionFin)
+		else if (status == DetectionTimer::WAIT_FOR_FACE)
 		{
 			Painter::paintText(frame, "Fit face into outline...", Scalar(255, 255, 255));
 		}
-		else if (isOn && !start)
+		else if (status == DetectionTimer::DETECTED)
 		{
 			Painter::paintText(frame, "Mask detected", Scalar(0, 255, 0));
 		}
-		else if (!isOn && !start)
+		else if (status == DetectionTimer::NOT_DETECTED)
 		{
 			Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
 		}
 
-		if (timer.CheckTimeCounter(3) && !start)
-		{
-			detectionFin = true;
-		}
-
-		if (start)
-		{
-
-			if (timer.CheckTimeCounter(5))
-			{
-				int percent = (correctCount * 100) / frameCount;
-				std::cout << percent << "% " << frameCount + correctCount << std::endl;
-				if (percent >= PASS_PRECENTAGE_THRESHOLD && frameCount + correctCount > MINIMAL_FRAME_THRESHOLD)
-				{
-					isOn = true;
-					std::cout << "maska jest zalozona" << std::endl;
-				}
-				else
-				{
-					std::cout << "maski nie wykryto" << std::endl;
-					isOn = false;
-				}
-				timer.StartTimeCounter();
-				start = false;
-				detectionFin = false;
-			}
-		}
-
-		if (result == MaskOn::CORRECT)
-		{
-			if (!start && timer.CheckTimeCounter(3))
-			{
-
-				std::cout << "start wykrywania" << std::endl;
-				frameCount = 1;
-				correctCount = 0;
-				start = true;
-				isOn = false;
-				timer.StartTimeCounter();
-			}
-			else
-			{
-				frameCount++;
-				correctCount++;
-			}
-		}
-		else if (result == MaskOn::NONE)
-		{
-			if (start)
-			{
-				frameCount++;
-			}
-		}
+		detectionTimer.checkFrame(result);
 
 		imshow("Live", frame);
 		if (waitKey(5) >= 0)
