@@ -1,16 +1,5 @@
-#include "Resources.h"
-#include "FaceDetection.h"
-#include "EyesDetection.h"
-#include "Properties.h"
-#include "MaskDetection.h"
-#include "MaskColor.h"
-#include "Painter.h"
-#include "Timer.h"
-#include <iostream>
-#include <string>
-#include <opencv2/highgui/highgui.hpp>
-#include "DetectionTimer.h"
 #include "Camera.h"
+#include <iostream>
 
 int main(int argc, char **argv)
 {

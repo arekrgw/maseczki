@@ -1,10 +1,9 @@
 #include "MaskColor.h"
 #include "Resources.h"
+#include "Painter.h"
 #include <iostream>
 #include <cmath>
-#include "Painter.h"
 #include <opencv2/opencv.hpp>
-
 #include <opencv2/highgui/highgui.hpp>
 
 using namespace cv;

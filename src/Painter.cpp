@@ -1,7 +1,7 @@
-#include <opencv2/opencv.hpp>
 #include "Painter.h"
 #include "Properties.h"
 #include "MaskOn.h"
+#include <opencv2/opencv.hpp>
 
 void Painter::paintFaceCharacteristics(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose, MaskOn status)
 {

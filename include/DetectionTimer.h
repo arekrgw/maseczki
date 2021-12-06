@@ -1,10 +1,10 @@
 #pragma once
 #include "DetectionTimer.h"
-#include <opencv2/objdetect/objdetect.hpp>
-#include <opencv2/opencv.hpp>
 #include "Resources.h"
 #include "Timer.h"
 #include "MaskOn.h"
+#include <opencv2/objdetect/objdetect.hpp>
+#include <opencv2/opencv.hpp>
 
 using namespace cv;
 

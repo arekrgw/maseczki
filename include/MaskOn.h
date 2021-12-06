@@ -1,5 +1,4 @@
-#ifndef MASK_ON
-#define MASK_ON
+#pragma once
 
 enum MaskOn
 {
@@ -8,5 +7,3 @@ enum MaskOn
   NO_FACE,
   NONE
 };
-
-#endif

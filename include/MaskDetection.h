@@ -1,5 +1,4 @@
 #pragma once
-#include <opencv2/opencv.hpp>
 #include "MaskOn.h"
 #include "FaceDetection.h"
 #include "EyesDetection.h"
@@ -7,6 +6,7 @@
 #include "NoseDetection.h"
 #include "MaskColor.h"
 #include "Properties.h"
+#include <opencv2/opencv.hpp>
 
 using namespace cv;
 

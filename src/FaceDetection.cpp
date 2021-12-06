@@ -1,11 +1,11 @@
 #include "FaceDetection.h"
 #include "Resources.h"
+#include "Properties.h"
 #include <iostream>
 #include <cmath>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
 #include <limits>
-#include "Properties.h"
 
 using namespace cv;
 

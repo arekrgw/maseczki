@@ -3,10 +3,10 @@
 #include "EyesDetection.h"
 #include "MouthDetection.h"
 #include "MaskColor.h"
+#include "Properties.h"
 #include <iostream>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
-#include "Properties.h"
 
 using namespace cv;
 

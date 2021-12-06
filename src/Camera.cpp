@@ -1,6 +1,6 @@
 #include "Camera.h"
-#include <iostream>
 #include "Painter.h"
+#include <iostream>
 
 Camera::Camera()
 {
