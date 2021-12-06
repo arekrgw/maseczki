@@ -51,12 +51,12 @@ MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth,
     return MaskOn::NONE;
   }
 
-  // int maskCol = maskColor.detect(croppedFace);
+  int maskCol = maskColor.detect(croppedFace);
 
-  // if (maskCol == 1)
-  // {
-  //   return MaskOn::NONE;
-  // }
+   if (maskCol == 1)
+  {
+     return MaskOn::NONE;
+   }
 
   return MaskOn::CORRECT;
 }
