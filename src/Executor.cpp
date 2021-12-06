@@ -29,15 +29,17 @@ bool Executor::executeCommand(Executor::CommandType type)
 {
   if (commandExecuted && initialized)
     return false;
-  std::cout << "[Executor] executing commang\n";
+
   if (type == Executor::CommandType::SUCCESS)
   {
+    std::cout << "[Executor] executing command " << successCommand << std::endl;
     system(successCommand.c_str());
     commandExecuted = true;
     return true;
   }
   else if (type == Executor::CommandType::FAILURE)
   {
+    std::cout << "[Executor] executing command " << failureCommand << std::endl;
     system(failureCommand.c_str());
     commandExecuted = true;
     return true;

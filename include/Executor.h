@@ -3,7 +3,6 @@
 
 class Executor
 {
-
 private:
   bool initialized = false;
   bool commandExecuted = false;
@@ -11,6 +10,7 @@ private:
   std::string failureCommand;
 
 public:
+  Executor() = default;
   enum CommandType
   {
     FAILURE = 1,
