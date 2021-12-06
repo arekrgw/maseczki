@@ -30,8 +30,9 @@ add_executable(maseczki-pk
 	src/Properties.cpp
 	src/Timer.cpp
 	src/DetectionTimer.cpp
+	src/Camera.cpp
 	# You can put here your .h and .cpp files to expand the example.
- )
+  "include/Camera.h" "src/Camera.cpp")
 
 target_link_libraries(maseczki-pk
 	${OpenCV_LIBS}

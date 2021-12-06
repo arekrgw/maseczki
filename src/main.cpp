@@ -10,6 +10,7 @@
 #include <string>
 #include <opencv2/highgui/highgui.hpp>
 #include "DetectionTimer.h"
+
 int main(int argc, char **argv)
 {
 	
@@ -53,8 +54,20 @@ int main(int argc, char **argv)
 		Painter::paintFaceCharacteristics(frame, face, eyePair, mouth, nose, result);
 
 
-		detectionTimer.checkTimer(frame);
+		DetectionTimer::DetectionStatus status = detectionTimer.checkTimer();
 		
+		if (status == DetectionTimer::STARTED) {
+			Painter::paintText(frame, "Detection started", Scalar(0, 120, 255));
+		}
+		else if (status == DetectionTimer::WAIT_FOR_FACE) {
+			Painter::paintText(frame, "Fit face into outline...", Scalar(255, 255, 255));
+		}
+		else if (status == DetectionTimer::DETECTED) {
+			Painter::paintText(frame, "Mask detected", Scalar(0, 255, 0));
+		}
+		else if (status == DetectionTimer::NOT_DETECTED) {
+			Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
+		}
 
 		detectionTimer.checkFrame(result);
 

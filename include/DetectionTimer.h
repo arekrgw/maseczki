@@ -18,9 +18,14 @@ private:
 	bool start;
 	bool isOn;
 	bool detectionFin;
+	
 
 public:
+	enum DetectionStatus {
+		STARTED = 1,WAIT_FOR_FACE,DETECTED,NOT_DETECTED
+	};
 	DetectionTimer();
-	void checkTimer(Mat frame);
+	DetectionTimer::DetectionStatus checkTimer();
 	void checkFrame(MaskOn result);
+	DetectionTimer::DetectionStatus getResult();
 };

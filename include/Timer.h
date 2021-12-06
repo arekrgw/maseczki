@@ -9,7 +9,7 @@ private:
 
 
 public:
-	void StartTimeCounter();
-	bool CheckTimeCounter(int secounds);
+	void startTimeCounter();
+	bool checkTimeCounter(int seconds);
 
 };

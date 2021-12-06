@@ -14,7 +14,7 @@ DetectionTimer::DetectionTimer() {
 void DetectionTimer::checkFrame(MaskOn result) {
 
 	if (result == MaskOn::CORRECT) {
-		if (!start && timer.CheckTimeCounter(3))
+		if (!start && timer.checkTimeCounter(3))
 		{
 
 			std::cout << "start wykrywania" << std::endl;
@@ -22,7 +22,7 @@ void DetectionTimer::checkFrame(MaskOn result) {
 			correctCount = 0;
 			start = true;
 			isOn = false;
-			timer.StartTimeCounter();
+			timer.startTimeCounter();
 		}
 		else
 		{
@@ -38,50 +38,45 @@ void DetectionTimer::checkFrame(MaskOn result) {
 
 }
 
-void DetectionTimer::checkTimer(Mat frame) {
-	if (start) {
-		Painter::paintText(frame, "Detection started", Scalar(0, 120, 255));
-	}
-	else if (detectionFin) {
-		Painter::paintText(frame, "Fit face into outline...", Scalar(255, 255, 255));
-	}
-	else if (isOn && !start)
-	{
-		Painter::paintText(frame, "Mask detected", Scalar(0, 255, 0));
-	}
-	else if (!isOn && !start)
-	{
-		Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
-	}
+DetectionTimer::DetectionStatus DetectionTimer::checkTimer() {
+	
 
-
-	if (timer.CheckTimeCounter(3) && !start) {
+	if (timer.checkTimeCounter(3) && !start) {
 		detectionFin = true;
 	}
 
-	if (start)
+	if (start && timer.checkTimeCounter(5))
 	{
 
-
-		if (timer.CheckTimeCounter(5))
+		int percent = (correctCount * 100) / frameCount;
+		if (percent >= PASS_PRECENTAGE_THRESHOLD && frameCount + correctCount > MINIMAL_FRAME_THRESHOLD)
 		{
-			int percent = (correctCount * 100) / frameCount;
-			std::cout << percent << "% " << frameCount + correctCount << std::endl;
-			if (percent >= PASS_PRECENTAGE_THRESHOLD && frameCount + correctCount > MINIMAL_FRAME_THRESHOLD)
-			{
-				isOn = true;
-				std::cout << "maska jest zalozona" << std::endl;
-			}
-			else
-			{
-				std::cout << "maski nie wykryto" << std::endl;
-				isOn = false;
-			}
-			timer.StartTimeCounter();
-			start = false;
-			detectionFin = false;
+			isOn = true;
 		}
+		else
+		{
+			isOn = false;
+		}
+		timer.startTimeCounter();
+		start = false;
+		detectionFin = false;
+		
 	}
 
+	return getResult();
+	
+}
 
+DetectionTimer::DetectionStatus DetectionTimer::getResult() {
+	if (start) {
+		return STARTED;
+	}
+	else if (detectionFin) {
+		return WAIT_FOR_FACE;
+	}
+	else if (isOn && !start) {
+		return DETECTED;
+	}
+
+	return NOT_DETECTED;
 }
