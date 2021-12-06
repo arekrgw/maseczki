@@ -10,7 +10,6 @@
 
 using namespace cv;
 
-
 MaskDetection::MaskDetection(Properties &props)
 {
   this->props = props;
@@ -19,7 +18,6 @@ MaskDetection::MaskDetection(Properties &props)
   mouthDetection = MouthDetection(props);
   noseDetection = NoseDetection(props);
 }
-
 
 MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth, Rect &nose)
 {
@@ -53,12 +51,12 @@ MaskOn MaskDetection::detect(Mat &image, Rect &face, Rect &eyePair, Rect &mouth,
     return MaskOn::NONE;
   }
 
-  //int maskCol = maskColor.detect(croppedFace);
+  // int maskCol = maskColor.detect(croppedFace);
 
-  //if (maskCol == 1)
-  //{
-  //  return MaskOn::NONE;
-  //}
+  // if (maskCol == 1)
+  // {
+  //   return MaskOn::NONE;
+  // }
 
   return MaskOn::CORRECT;
 }

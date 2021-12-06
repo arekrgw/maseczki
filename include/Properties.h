@@ -11,14 +11,6 @@ public:
   int height;
   int faceOutlineHeight;
   int faceOutlineWidth;
-  int minimalFaceHeight;
-  int minimalFaceWidth;
-  int minimalEyesWidth;
-  int minimalEyesHeight;
-  int minimalMouthWidth;
-  int minimalMouthHeight;
-  int minimalNoseWidth;
-  int minimalNoseHeight;
 
   Properties();
   void calculateProperties(double width, double height);

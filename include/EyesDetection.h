@@ -10,13 +10,12 @@ using namespace cv;
 
 class EyesDetection
 {
-
 private:
 	CascadeClassifier eyesCascade;
 	void loadEyesCascade();
 	int findIndexOfBestEyes(Mat &image, std::vector<Rect> &eyes);
 	void findAllEyes(Mat &image, std::vector<Rect> &eyes);
-  Properties props;
+	Properties props;
 
 public:
 	EyesDetection(Properties &props);

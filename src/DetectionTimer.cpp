@@ -19,7 +19,7 @@ void DetectionTimer::checkFrame(MaskOn result)
 		if (!start && timer.checkTimeCounter(3))
 		{
 
-			std::cout << "start wykrywania" << std::endl;
+			std::cout << "[DetectionTimer] detection started" << std::endl;
 			frameCount = 1;
 			correctCount = 0;
 			start = true;
