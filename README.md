@@ -12,13 +12,7 @@ download and insert images into "assets" folder flat
 - https://highontechs.com/computer-vision/face-mask-detection-using-opencv-haarcascade/
 
 
-## Examples
-
-### FaceDetection
+## Usage
 ```
-Mat image, croppedImage;
-Rect coords;
-FaceDetection faceDetection;
-
-faceDetection.detect(image, croppedImage, coords);
+./executable success_script fail_script
 ```
