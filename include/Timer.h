@@ -11,4 +11,5 @@ private:
 public:
 	void StartTimeCounter();
 	bool CheckTimeCounter(int secounds);
+
 };
