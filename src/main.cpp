@@ -1,11 +1,13 @@
 #include "Camera.h"
+#include "Executor.h"
 #include <iostream>
 
 int main(int argc, char **argv)
 {
 	try
 	{
-		Camera camera;
+		Executor exec(argc, argv);
+		Camera camera(exec);
 		camera.start();
 	}
 	catch (std::exception error)
