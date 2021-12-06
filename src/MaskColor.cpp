@@ -39,7 +39,7 @@ int MaskColor::detect(Mat &image)
 
 Mat MaskColor::upperHalfFn(Mat &image)
 {
-	Mat croppedImage = image(Rect(image.cols * 0.4, image.rows*0.1, image.cols * 0.2, image.rows * 0.2));
+	Mat croppedImage = image(Rect(image.cols*0.2, 0, image.cols*0.6, image.rows*0.3));
 	Mat display;
 	resize(croppedImage, display, Size(),3,3);
 	imshow("oo", display);
@@ -48,10 +48,10 @@ Mat MaskColor::upperHalfFn(Mat &image)
 
 Mat MaskColor::lowerHalfFn(Mat &image)
 {
-	Mat croppedImage = image(Rect(image.cols * 0.4, image.rows * 0.7, image.cols * 0.2, image.rows * 0.2));
+	Mat croppedImage = image(Rect(image.cols * 0.25, image.rows *0.55, image.cols * 0.5, image.rows *0.35));
 	Mat display;
 	resize(croppedImage, display, Size(), 3, 3);
-	imshow("oo2", display);
+	//imshow("oo2", display);
 	return croppedImage;
 }
 
