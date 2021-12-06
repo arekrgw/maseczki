@@ -1,9 +1,11 @@
 #include "Camera.h"
 #include "Painter.h"
+#include "Executor.h"
 #include <iostream>
 
-Camera::Camera()
+Camera::Camera(Executor &exec)
 {
+  this->exec = exec;
   cap.open(0);
 
   if (!cap.isOpened())
@@ -40,7 +42,11 @@ void Camera::start()
 
     DetectionTimer::DetectionStatus status = detectionTimer.checkTimer();
 
+    if (status == DetectionTimer::DetectionStatus::WAIT_FOR_FACE)
+      exec.resetExecutor();
+
     paintMessageOnFrame(frame, status);
+    executeScript(status);
 
     detectionTimer.checkFrame(result);
 
@@ -59,20 +65,32 @@ void Camera::manipulateFrame(Mat &raw)
 
 void Camera::paintMessageOnFrame(Mat &frame, DetectionTimer::DetectionStatus status)
 {
-  if (status == DetectionTimer::STARTED)
+  if (status == DetectionTimer::DetectionStatus::STARTED)
   {
     Painter::paintText(frame, "Detection started", Scalar(0, 120, 255));
   }
-  else if (status == DetectionTimer::WAIT_FOR_FACE)
+  else if (status == DetectionTimer::DetectionStatus::WAIT_FOR_FACE)
   {
     Painter::paintText(frame, "Fit face into outline...", Scalar(255, 255, 255));
   }
-  else if (status == DetectionTimer::DETECTED)
+  else if (status == DetectionTimer::DetectionStatus::DETECTED)
   {
     Painter::paintText(frame, "Mask detected", Scalar(0, 255, 0));
   }
-  else if (status == DetectionTimer::NOT_DETECTED)
+  else if (status == DetectionTimer::DetectionStatus::NOT_DETECTED)
   {
     Painter::paintText(frame, "Mask not detected", Scalar(0, 0, 255));
+  }
+}
+
+void Camera::executeScript(DetectionTimer::DetectionStatus status)
+{
+  if (status == DetectionTimer::DetectionStatus::DETECTED)
+  {
+    exec.executeCommand(Executor::CommandType::SUCCESS);
+  }
+  else if (status == DetectionTimer::DetectionStatus::NOT_DETECTED)
+  {
+    exec.executeCommand(Executor::CommandType::FAILURE);
   }
 }
