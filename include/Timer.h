@@ -1,3 +1,4 @@
+#pragma once
 #include <chrono>
 
 class Timer
@@ -7,9 +8,7 @@ private:
 	int frameCount;
 	int correctFrameCount;
 
-
 public:
 	void startTimeCounter();
 	bool checkTimeCounter(int seconds);
-
 };
