@@ -4,7 +4,8 @@
 class Executor
 {
 private:
-  bool initialized = false;
+  bool successCommandReady = false;
+  bool failureCommandReady = false;
   bool commandExecuted = false;
   std::string successCommand;
   std::string failureCommand;
