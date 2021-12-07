@@ -31,7 +31,6 @@ int MaskColor::detect(Mat &image)
 			color += countUpper[i] - countLower[i];
 	}
 	color /= 3;
-	std::cout << color << std::endl;
 	if (color >= 30)
 		return 0;
 	return 1;
@@ -39,19 +38,17 @@ int MaskColor::detect(Mat &image)
 
 Mat MaskColor::upperHalfFn(Mat &image)
 {
-	Mat croppedImage = image(Rect(image.cols*0.2, 0, image.cols*0.6, image.rows*0.3));
+	Mat croppedImage = image(Rect(image.cols * 0.2, 0, image.cols * 0.6, image.rows * 0.3));
 	Mat display;
-	resize(croppedImage, display, Size(),3,3);
-	imshow("oo", display);
+	resize(croppedImage, display, Size(), 3, 3);
 	return croppedImage;
 }
 
 Mat MaskColor::lowerHalfFn(Mat &image)
 {
-	Mat croppedImage = image(Rect(image.cols * 0.25, image.rows *0.55, image.cols * 0.5, image.rows *0.35));
+	Mat croppedImage = image(Rect(image.cols * 0.25, image.rows * 0.55, image.cols * 0.5, image.rows * 0.35));
 	Mat display;
 	resize(croppedImage, display, Size(), 3, 3);
-	//imshow("oo2", display);
 	return croppedImage;
 }
 
